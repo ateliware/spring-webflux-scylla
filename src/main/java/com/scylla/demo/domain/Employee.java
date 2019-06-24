@@ -1,13 +1,11 @@
 package com.scylla.demo.domain;
 
-import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
 import org.springframework.data.cassandra.core.mapping.Table;
 
 @Table
 public class Employee {
-    @PrimaryKeyColumn(ordinal = 1, type = PrimaryKeyType.PARTITIONED)
+    @PrimaryKey
     private int id;
     private String name;
     private String address;
