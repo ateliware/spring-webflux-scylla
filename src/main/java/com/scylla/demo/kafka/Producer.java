@@ -7,6 +7,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
@@ -22,9 +23,10 @@ public class Producer {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
+    @Transactional
     public void sendMessage(String message) {
         logger.info(String.format("#### -> Producing message -> %s", message));
-
+        // kafkaTemplate.send(env.getProperty("kafka.topic"), message);
         String key = message;
         ListenableFuture<SendResult<String, String>> future = kafkaTemplate
                 .send(env.getProperty("kafka.topic"),key,message);
@@ -47,9 +49,12 @@ public class Producer {
     }
 
     public void transaction(String message) {
-        kafkaTemplate.executeInTransaction(kafkaTemplate -> {
+        kafkaTemplate .executeInTransaction(kafkaTemplate -> {
             StringUtils.commaDelimitedListToSet(message).stream()
                     .forEach(foo -> kafkaTemplate.send(env.getProperty("kafka.topic"), foo));
+            /*for(String item : message) {
+                kafkaTemplate.send(env.getProperty("kafka.topic"), item);
+            }*/
             return null;
         });
     }
