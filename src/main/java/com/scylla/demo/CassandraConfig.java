@@ -15,7 +15,7 @@ import java.util.List;
 public class CassandraConfig extends AbstractCassandraConfiguration {
 
     private static final String KEYSPACE = "ateliware";
-    private static final String CPS = "localhost";
+    private static final String CPS = "docker.for.mac.localhost";
     private static final int PORT = 9042;
     //private Environment env;
 
