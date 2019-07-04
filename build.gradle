@@ -16,6 +16,10 @@ configurations {
     }
 }
 
+// apply from: "$rootDir/gradle/integration-test.gradle"
+apply from: "$rootDir/gradle/code-analysis.gradle"
+// apply from: "$rootDir/gradle/deploy.gradle"
+
 repositories {
     mavenCentral()
 }
@@ -27,4 +31,7 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
+    testImplementation 'org.springframework.kafka:spring-kafka-test'
+    testImplementation 'javax.servlet:javax.servlet-api'
+    testImplementation 'org.springframework:spring-webmvc'
 }
