@@ -7,9 +7,9 @@ import org.springframework.data.cassandra.config.CassandraClusterFactoryBean;
 import org.springframework.data.cassandra.config.SchemaAction;
 import org.springframework.data.cassandra.core.cql.keyspace.CreateKeyspaceSpecification;
 import org.springframework.data.cassandra.core.cql.keyspace.KeyspaceOption;
-
 import java.util.Collections;
 import java.util.List;
+
 
 @Configuration
 public class CassandraConfig extends AbstractCassandraConfiguration {
@@ -18,7 +18,6 @@ public class CassandraConfig extends AbstractCassandraConfiguration {
     private static final String CPS = "docker.for.mac.localhost";
     private static final int PORT = 9042;
     //private Environment env;
-
 
     @Override
     public CassandraClusterFactoryBean cluster() {
